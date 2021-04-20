@@ -148,7 +148,7 @@ jobs:
           path: libleaf-osx.zip
 
   create-release:
-    needs: [build-bin-cross, build-bin-local, build-lib-ios]
+    needs: [build-bin-cross, build-bin-local, build-lib-osx]
     runs-on: macos-latest
     steps:
       - name: checkout
