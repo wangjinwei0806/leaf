@@ -133,7 +133,7 @@ jobs:
       - name: build
         run: |
           export RUSTFLAGS="-Z strip=symbols"
-          make ios
+          make osx
 
       - name: zip artifacts
         run: |
