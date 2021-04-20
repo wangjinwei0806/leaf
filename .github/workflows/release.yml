@@ -110,7 +110,7 @@ jobs:
           name: leaf-${{ matrix.target }}
           path: leaf-${{ matrix.target }}
 
-  build-lib-ios:
+  build-lib-osx:
     runs-on: macos-latest
     steps:
       - name: checkout
@@ -125,7 +125,7 @@ jobs:
 
       - name: install toolchain
         run: |
-          rustup target add aarch64-apple-ios
+          rustup target add x86_64-apple-darwin
           cargo install cargo-lipo
           cargo install cbindgen
           brew update && brew install llvm unzip protobuf
@@ -139,13 +139,13 @@ jobs:
         run: |
           mv target/universal/release/libleaf.a .
           mv target/universal/release/leaf.h .
-          zip libleaf-ios.zip leaf.h libleaf.a
+          zip libleaf-osx.zip leaf.h libleaf.a
 
       - name: upload assets
         uses: actions/upload-artifact@v2
         with:
-          name: libleaf-ios.zip
-          path: libleaf-ios.zip
+          name: libleaf-osx.zip
+          path: libleaf-osx.zip
 
   create-release:
     needs: [build-bin-cross, build-bin-local, build-lib-ios]
